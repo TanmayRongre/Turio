@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Parisienne&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Edit this hex code to change the theme color everywhere! */
+  --color-primary: #ffb005;
+
+  --font-body: "Inter", sans-serif;
+  --font-cursive: "Parisienne", cursive;
+  --font-title: "Playfair Display", serif;
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.font-cursive {
+  font-family: var(--font-cursive);
+}
+
+.font-title {
+  font-family: var(--font-title);
+}
+
+html, body {
+  overscroll-behavior:none;
+}
