@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import TopBar from './TopBar'
 import Navbar from './Navbar'
-import heroVideo from '../assets/hero-video.mp4'
+import heroVideo from '../../assets/hero-video.mp4'
 
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -19,14 +19,15 @@ const Main = () => {
 
     const monthRef = useRef(null)
     const typeRef = useRef(null)
-
-    const [offsetY, setOffsetY] = useState(0)
+    const videoRef = useRef(null)
 
     useEffect(() => {
         const handleScroll = () => {
-            setOffsetY(window.scrollY)
+            if (!videoRef.current) return
+            // Directly mutate the DOM — no React re-render, no jitter
+            videoRef.current.style.transform = `translateY(${window.scrollY * 0.8}px)`
         }
-        window.addEventListener('scroll', handleScroll)
+        window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
@@ -41,18 +42,20 @@ const Main = () => {
 
     return (
         <div className="relative w-full h-[80vh]">
-            
+
             <div className="absolute inset-0 w-full h-full overflow-hidden rounded-b-[3rem]">
-                <video autoPlay muted loop playsInline
+                <video
+                    ref={videoRef}
+                    autoPlay muted loop playsInline
                     className="absolute left-0 w-full h-full object-cover"
                     style={{
                         top: '-20vh',
                         height: '140vh',
-                        transform: `translateY(${offsetY * 0.8}px)`
+                        willChange: 'transform',
                     }}>
                     <source src={heroVideo} type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/10 to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/10 to-black/20 z-10 pointer-events-none" />
             </div>
 
             <div className="absolute inset-0 w-full h-full z-10 flex flex-col">
@@ -60,9 +63,9 @@ const Main = () => {
                 <Navbar />
                 <div className="flex justify-center items-center w-full h-full flex-col gap-20">
                     <div className="flex flex-col justify-center items-center gap-6">
-                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white font-title text-center px-4">Your Journey Begins</h1>
-                        <p className="text-white text-base md:text-[20px] w-full max-w-3xl text-center px-4">
-                            A journey of a 1000 miles starts with a single step. Import the full demo content with 1 click and create a head-turning website for your travel agency.
+                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white font-title text-center px-4 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">Your Journey Begins</h1>
+                        <p className="text-white/95 text-base md:text-[20px] w-full max-w-3xl text-center px-4 font-medium drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
+                            A journey of a 1000 miles starts with a single step. From exotic getaways to cultural escapes, we handle every detail so you can focus on making memories.
                         </p>
                     </div>
                     <div className="bg-white z-1000 rounded-2xl md:rounded-full mx-4 md:mx-0">

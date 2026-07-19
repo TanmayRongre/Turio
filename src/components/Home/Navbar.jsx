@@ -23,7 +23,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full flex justify-between items-center px-4 md:px-10 lg:px-30 py-5 bg-transparent relative z-[9999]">
+      <nav className="w-full flex justify-between items-center px-4 md:px-10 lg:px-30 py-5 bg-transparent relative z-9999">
 
         <div>
           <span className="font-cursive font-bold text-3xl text-white">Turio</span>
@@ -54,7 +54,7 @@ const Navbar = () => {
       </nav>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed top-0 left-0 w-full h-[100vh] bg-black/95 z-[10000] flex flex-col items-center justify-center">
+        <div className="lg:hidden fixed top-0 left-0 w-full h-screen bg-black/95 z-10000 flex flex-col items-center justify-center">
           <div className="absolute top-0 left-0 w-full flex justify-between items-center px-4 md:px-10 py-5">
             <span className="font-cursive font-bold text-3xl text-white">Turio</span>
             <button 

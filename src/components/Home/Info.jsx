@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import InfoBg from '../assets/InfoBg.png'
-import Infop2 from '../assets/Infop2.jpg'
+import InfoBg from '../../assets/InfoBg.png'
+import Infop2 from '../../assets/Infop2.jpg'
 import InfoDestinations from './InfoDestinations'
 
 const Info = () => {
@@ -19,14 +19,14 @@ const Info = () => {
         <div className="w-full flex flex-col lg:flex-row gap-12 justify-between items-center">
 
           <div className="w-full lg:w-[55%] flex justify-center">
-            <div className="relative overflow-hidden group w-full aspect-[4/3] rounded-3xl shadow-xl">
+            <div className="relative overflow-hidden group w-full aspect-4/3 rounded-3xl shadow-xl">
               <img
                 src={Infop2}
                 alt="The Beauty of Buddhism"
                 className="w-full h-full object-cover block transition-transform duration-700 group-hover:scale-105"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-90" />
 
               <div className="absolute bottom-8 left-8 flex flex-col items-start z-10">
                 <span className="font-cursive text-[#FFCC05] text-[2rem] leading-none mb-2">

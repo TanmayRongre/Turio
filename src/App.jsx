@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import StickyNavbar from './components/StickyNavbar'
+import StickyNavbar from './components/Navbar/StickyNavbar'
 import Home from './pages/Home'
 import Destinations from './pages/Destinations'
 import Tours from './pages/Tours'

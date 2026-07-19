@@ -2,14 +2,14 @@ import React from 'react';
 
 const InfoCard = ({ country }) => {
     return (
-        <div className="group relative w-[85vw] md:w-[calc((100%-48px)/3)] h-[450px] rounded-3xl overflow-hidden shadow-lg flex-shrink-0 cursor-pointer snap-start">
+        <div className="group relative w-[85vw] md:w-[calc((100%-48px)/3)] h-[450px] rounded-3xl overflow-hidden shadow-lg shrink-0 cursor-pointer snap-start">
             <img
                 src={country.img}
                 alt={country.name}
                 className="absolute inset-0 w-full h-full object-cover block transition-transform duration-750 ease-out group-hover:scale-105"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 transition-all duration-500 group-hover:from-black/95 group-hover:via-black/60" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-90 transition-all duration-500 group-hover:from-black/95 group-hover:via-black/60" />
 
             <div className="absolute bottom-8 left-8 right-8 text-white flex flex-col justify-end pointer-events-none">
 
