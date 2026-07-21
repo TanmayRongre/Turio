@@ -21,7 +21,6 @@ const App = () => {
   return (
     <div>
       <StickyNavbar showSticky={showSticky} />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/destinations" element={<Destinations />} />
