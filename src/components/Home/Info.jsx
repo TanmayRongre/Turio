@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import InfoBg from '../../assets/InfoBg.png'
 import Infop2 from '../../assets/Infop2.jpg'
 import InfoDestinations from './InfoDestinations'
-
-const Info = () => {
+const Info = ({ countries }) => {
   const [modalOpen, setModalOpen] = useState(false)
-
   return (
     <div className="relative w-full min-h-screen bg-white py-20 flex flex-col justify-center items-center overflow-hidden">
       <img
@@ -13,11 +11,8 @@ const Info = () => {
         alt="Info background"
         className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
       />
-
       <div className="relative w-full px-4 md:px-10 lg:px-20 flex flex-col gap-28 z-10">
-
         <div className="w-full flex flex-col lg:flex-row gap-12 justify-between items-center">
-
           <div className="w-full lg:w-[55%] flex justify-center">
             <div className="relative overflow-hidden group w-full aspect-4/3 rounded-3xl shadow-xl">
               <img
@@ -25,9 +20,7 @@ const Info = () => {
                 alt="The Beauty of Buddhism"
                 className="w-full h-full object-cover block transition-transform duration-700 group-hover:scale-105"
               />
-
               <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-90" />
-
               <div className="absolute bottom-8 left-8 flex flex-col items-start z-10">
                 <span className="font-cursive text-[#FFCC05] text-[2rem] leading-none mb-2">
                   new
@@ -38,7 +31,6 @@ const Info = () => {
                 <p className="text-gray-300 text-sm font-light mb-6 tracking-wide">
                   The Beauty of Buddhism
                 </p>
-
                 <button
                   id="play-video-btn"
                   onClick={() => setModalOpen(true)}
@@ -52,7 +44,6 @@ const Info = () => {
               </div>
             </div>
           </div>
-
           <div className="w-full lg:w-[45%] flex flex-col justify-center items-start pr-0 lg:pr-6">
             <h2 className="font-title text-4xl md:text-[2.8rem] text-[#222] font-bold leading-[1.15] mb-6">
               A Simply Perfect Place<br />To Get Lost
@@ -70,12 +61,10 @@ const Info = () => {
             </button>
           </div>
         </div>
-
         <div className="w-full pt-4">
-          <InfoDestinations />
+          <InfoDestinations countries={countries} />
         </div>
       </div>
-
       {modalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
@@ -96,7 +85,6 @@ const Info = () => {
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
-
             <iframe
               src="https://player.vimeo.com/video/381119540?autoplay=1&title=0&byline=0&portrait=0"
               className="w-full h-full rounded-2xl border-none shadow-2xl"
@@ -110,5 +98,4 @@ const Info = () => {
     </div>
   )
 }
-
 export default Info

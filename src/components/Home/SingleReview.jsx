@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Star, Quote } from 'lucide-react';
-
 const SingleReview = ({ reviews = [] }) => {
   const [active, setActive] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState('next');
-
   const goTo = useCallback((index, dir = 'next') => {
     if (isAnimating) return;
     setDirection(dir);
@@ -15,45 +13,30 @@ const SingleReview = ({ reviews = [] }) => {
       setIsAnimating(false);
     }, 300);
   }, [isAnimating]);
-
   const next = useCallback(() => {
     goTo((active + 1) % reviews.length, 'next');
   }, [active, reviews.length, goTo]);
-
   const prev = useCallback(() => {
     goTo((active - 1 + reviews.length) % reviews.length, 'prev');
   }, [active, reviews.length, goTo]);
-
-  // Auto-play every 5s
   useEffect(() => {
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
   }, [next]);
-
   if (!reviews.length) return null;
-
   const review = reviews[active];
-
   const slideClass = isAnimating
     ? direction === 'next'
       ? 'opacity-0 translate-x-8'
       : 'opacity-0 -translate-x-8'
     : 'opacity-100 translate-x-0';
-
   return (
     <div className="flex flex-col items-center gap-6 w-full mt-4">
-
       <Quote size={32} className="text-amber-400 opacity-70 rotate-180" />
-
-      {/* Animated review content */}
       <div className={`flex flex-col items-center gap-4 transition-all duration-300 ease-in-out ${slideClass}`}>
-
-        {/* Tour name */}
         <p className="text-amber-400 font-semibold text-sm tracking-[0.2em] uppercase">
           {review.tourName}
         </p>
-
-        {/* Stars */}
         <div className="flex gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
@@ -63,16 +46,10 @@ const SingleReview = ({ reviews = [] }) => {
             />
           ))}
         </div>
-
-        {/* Comment */}
         <p className="text-gray-300 text-sm leading-7 max-w-sm text-center italic">
           "{review.comment}"
         </p>
-
-        {/* Divider */}
         <div className="w-10 h-px bg-amber-400/50" />
-
-        {/* Reviewer */}
         <div className="flex items-center gap-4">
           <img
             src={review.image}
@@ -87,8 +64,6 @@ const SingleReview = ({ reviews = [] }) => {
           </div>
         </div>
       </div>
-
-      {/* Dots only */}
       <div className="flex gap-2 mt-2">
         {reviews.map((_, i) => (
           <button
@@ -103,5 +78,4 @@ const SingleReview = ({ reviews = [] }) => {
     </div>
   );
 };
-
 export default SingleReview;

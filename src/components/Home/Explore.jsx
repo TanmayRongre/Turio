@@ -2,9 +2,7 @@ import React from 'react'
 import ExploreBg from '../../assets/ExploreBg.png'
 import ExplorePanel from '../../assets/ExplorePanel.png'
 import SingleReview from './SingleReview'
-
 const Explore = () => {
-
   const reviews = [
     {
       id: 1,
@@ -31,33 +29,24 @@ const Explore = () => {
       comment: "I booked the Deep Ocean Diving package on a whim and it turned out to be the best decision of my life. The crew was professional, the underwater world was stunning, and Turio handled everything flawlessly from start to finish."
     }
   ];
-
   return (
     <div className="w-full bg-black flex flex-col md:flex-row min-h-[60vh]">
-
       <div className="w-full md:flex-1 relative overflow-hidden group flex justify-center flex-col items-center py-16 md:py-0 min-h-[50vh]">
-
-        {/* Animated Background */}
         <img
           src={ExploreBg}
           alt="Explore Background"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-200 ease-out scale-105 group-hover:-translate-x-4"
         />
-
-        {/* Content container - needs relative z-10 to sit above the image */}
         <div className="relative z-10 text-center flex flex-col items-center gap-10">
           <div className="flex items-center flex-col">
             <h2 className="font-cursive text-4xl md:text-5xl font-bold text-amber-400 leading-tight">
               adventure
             </h2>
-
             <h2 className="text-3xl md:text-5xl font-bold text-white font-title leading-tight mt-2">
               Dare to Explore
             </h2>
           </div>
-
           <p className="text-gray-300 text-sm leading-7 max-w-[90%] md:max-w-[70%] text-center">Exploring means learning. Bring new experiences from each journey. Meet different cultures, traditions and landscapes. Choose your next destination and start your trip.</p>
-
           <button
             id="see-more-btn"
             className="hover:scale-110 duration-300 text-[#FFCC05] text-[12px] font-semibold tracking-[0.2em] uppercasecursor-pointer border-b-2 transition-transform "
@@ -70,5 +59,4 @@ const Explore = () => {
     </div>
   )
 }
-
 export default Explore

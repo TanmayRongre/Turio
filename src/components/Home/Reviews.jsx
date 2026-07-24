@@ -2,9 +2,7 @@ import React from 'react'
 import ReviewPanel from '../../assets/ReviewPanel.png'
 import ReviewBg from '../../assets/reviewBg.png'
 import SingleReview from './SingleReview'
-
 const Reviews = () => {
-
     const reviews = [
         {
             id: 1,
@@ -31,7 +29,6 @@ const Reviews = () => {
             comment: "I booked the Deep Ocean Diving package on a whim and it turned out to be the best decision of my life. The crew was professional, the underwater world was stunning, and Turio handled everything flawlessly from start to finish."
         }
     ];
-    
   return (
     <div className="w-full bg-black flex flex-col md:flex-row min-h-[75vh]">
           <img className="w-full md:w-[50%] h-[40vh] md:h-auto object-cover object-center" src={ReviewPanel} alt="" />
@@ -39,17 +36,14 @@ const Reviews = () => {
             className="w-full md:flex-1 bg-cover bg-center text-center p-8 md:p-20 flex flex-col justify-center min-h-[50vh]" 
             style={{ backgroundImage: `url(${ReviewBg})` }}
           >
-
               <h2 className="text-3xl md:text-5xl font-bold text-white font-title leading-tight">
                   Our Top Reviews
               </h2>
               <div>
                   <SingleReview reviews={reviews} />
               </div>
-
           </div>
     </div>
   )
 }
-
 export default Reviews
