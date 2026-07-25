@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import ExploreBg from '../../assets/ExploreBg.png'
 import ExplorePanel from '../../assets/ExplorePanel.png'
 import SingleReview from './SingleReview'
 const Explore = () => {
+  const navigate = useNavigate()
   const reviews = [
     {
       id: 1,
@@ -48,8 +50,9 @@ const Explore = () => {
           </div>
           <p className="text-gray-300 text-sm leading-7 max-w-[90%] md:max-w-[70%] text-center">Exploring means learning. Bring new experiences from each journey. Meet different cultures, traditions and landscapes. Choose your next destination and start your trip.</p>
           <button
-            id="see-more-btn"
-            className="hover:scale-110 duration-300 text-[#FFCC05] text-[12px] font-semibold tracking-[0.2em] uppercasecursor-pointer border-b-2 transition-transform "
+            id="see-more-explore-btn"
+            onClick={() => navigate('/destinations')}
+            className="hover:scale-110 duration-300 text-[#FFCC05] text-[12px] font-semibold tracking-[0.2em] uppercase cursor-pointer border-b-2 transition-transform "
           >
             SEE MORE
           </button>

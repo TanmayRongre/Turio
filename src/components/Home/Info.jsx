@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import InfoBg from '../../assets/InfoBg.png'
 import Infop2 from '../../assets/Infop2.jpg'
 import InfoDestinations from './InfoDestinations'
 const Info = ({ countries }) => {
+  const navigate = useNavigate()
   const [modalOpen, setModalOpen] = useState(false)
   return (
     <div className="relative w-full min-h-screen bg-white py-20 flex flex-col justify-center items-center overflow-hidden">
@@ -55,6 +57,7 @@ const Info = ({ countries }) => {
             </p>
             <button
               id="see-more-btn"
+              onClick={() => navigate('/destinations')}
               className="bg-[#FFCC05] hover:bg-[#222] transition-colors duration-300 text-white text-[11px] font-bold tracking-[0.2em] uppercase px-10 py-4 cursor-pointer rounded-full shadow-md"
             >
               SEE MORE

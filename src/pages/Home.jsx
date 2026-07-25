@@ -11,7 +11,7 @@ const Home = ({ countries }) => {
       <Main countries={countries} />
       <Info countries={countries} />
       <Reviews />
-      <Gallery />
+      <Gallery countries={countries} />
       <Explore />
       <BlogHome />
       <Newsletter />

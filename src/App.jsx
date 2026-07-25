@@ -11,6 +11,7 @@ import Blog from './pages/Blog'
 import BlogDetails from './pages/BlogDetails'
 import Booking from './pages/Booking'
 import { countries } from './data/destinations'
+import CustomCursor from './components/CustomCursor'
 const App = () => {
   const [showSticky, setShowSticky] = useState(false)
   useEffect(() => {
@@ -22,6 +23,7 @@ const App = () => {
   }, [])
   return (
     <div>
+      <CustomCursor />
       <StickyNavbar showSticky={showSticky} />
       <Routes>
         <Route path="/" element={<Home countries={countries} />} />

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import GalleryBg from '../../assets/GalleryBg.png'
 const items = [
   {
@@ -30,7 +31,8 @@ const items = [
     gridClass: 'col-span-1 md:col-span-1 row-span-1',
   },
 ]
-const Gallery = () => {
+const Gallery = ({ countries = [] }) => {
+  const navigate = useNavigate()
   const sectionRef = useRef(null)
   const [parallaxY, setParallaxY] = useState(0)
   useEffect(() => {
@@ -79,6 +81,11 @@ const Gallery = () => {
           {items.map((item) => (
             <div
               key={item.id}
+              onClick={() => {
+                const match = countries.find(c => c.name.toLowerCase() === item.name.toLowerCase())
+                if (match) navigate(`/destinations/${match.id}`)
+                else navigate('/destinations')
+              }}
               className={`relative overflow-hidden rounded-2xl cursor-pointer group ${item.gridClass}`}
             >
               <img
@@ -101,7 +108,8 @@ const Gallery = () => {
         </div>
         <div className="flex items-center justify-center pt-15">
           <button
-            id="see-more-btn"
+            id="gallery-see-more-btn"
+            onClick={() => navigate('/destinations')}
             className="bg-[#FFCC05] hover:bg-[#222] transition-colors duration-300 text-white text-[11px] font-bold tracking-[0.2em] uppercase px-10 py-4 cursor-pointer rounded-full shadow-md"
           >
             SEE MORE

@@ -27,8 +27,14 @@ body {
 }
 
 html, body {
-  overscroll-behavior:none;
+  overscroll-behavior: none;
 }
+
+/* Hide the native cursor everywhere — CustomCursor replaces it */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
 
 .input-style {
   width: 100%;
