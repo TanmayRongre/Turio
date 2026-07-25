@@ -1,4 +1,5 @@
 import { Phone, MapPin, Mail} from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 const latestPosts = [
   {
     id: 1,
@@ -84,15 +85,22 @@ const Footer = () => {
           </ul>
         </div>
         <div className="flex flex-col gap-5">
-          <h4 className="text-white font-title text-lg font-semibold tracking-wide">Twitter Feed</h4>
+          <h4 className="text-white font-title text-lg font-semibold tracking-wide">Quick Links</h4>
           <div className="w-10 h-0.5 bg-[#d4af37] -mt-2" />
-          <p className="text-gray-400 text-sm leading-relaxed">
-            For all the latest news and updates, follow us on Twitter:{" "}
-            <a href="#" className="text-[#d4af37] hover:underline">@TurioTravel</a>
-          </p>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            "Travel is the only thing you buy that makes you richer."
-          </p>
+          <ul className="flex flex-col gap-3 text-sm">
+            <li>
+              <NavLink to="/" className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/destinations" className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300">Destinations</NavLink>
+            </li>
+            <li>
+              <NavLink to="/tours" className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300">Tours</NavLink>
+            </li>
+            <li>
+              <NavLink to="/blog" className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300">Blog</NavLink>
+            </li>
+          </ul>
         </div>
         <div className="flex flex-col gap-5">
           <h4 className="text-white font-title text-lg font-semibold tracking-wide">Follow Us</h4>

@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import TopBar from '../components/Home/TopBar';
 import Navbar from '../components/Home/Navbar';
 
 const TourDetails = ({ countries }) => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const imageRef = useRef(null);
     
     // Find the tour across all countries
@@ -156,7 +157,17 @@ const TourDetails = ({ countries }) => {
                             </div>
                         </div>
 
-                        <button className="w-full py-4 mt-2 bg-[#FFCC05] hover:bg-[#222] text-white font-bold tracking-[0.2em] uppercase rounded-full transition-colors shadow-lg">
+                        <button
+                            onClick={() => navigate('/booking', {
+                                state: {
+                                    tourName: tour.name,
+                                    price: tour.price,
+                                    destination: countries?.find(c => c.tours?.some(t => t.id === tour.id))?.name || '',
+                                    heroImg: tour.img,
+                                    travelType: tour.type || '',
+                                }
+                            })}
+                            className="w-full py-4 mt-2 bg-[#FFCC05] hover:bg-[#222] text-white font-bold tracking-[0.2em] uppercase rounded-full transition-colors shadow-lg cursor-pointer">
                             Book This Tour
                         </button>
                         

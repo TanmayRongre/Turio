@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import TopBar from './TopBar'
 import Navbar from './Navbar'
 import heroVideo from '../../assets/hero-video.mp4'
@@ -7,15 +8,18 @@ const months = [
     'July', 'August', 'September', 'October', 'November', 'December'
 ]
 const travelTypes = ['Adventure', 'Cultural', 'Discovery', 'Historical', 'Relaxation', 'Wildlife']
-const Main = () => {
+const Main = ({ countries = [] }) => {
+    const navigate = useNavigate()
     const [destination, setDestination] = useState('')
     const [selectedMonth, setSelectedMonth] = useState(null)
     const [selectedType, setSelectedType] = useState(null)
     const [monthOpen, setMonthOpen] = useState(false)
     const [typeOpen, setTypeOpen] = useState(false)
+    const [showSuggestions, setShowSuggestions] = useState(false)
     const monthRef = useRef(null)
     const typeRef = useRef(null)
     const videoRef = useRef(null)
+    const destinationRef = useRef(null)
     useEffect(() => {
         const handleScroll = () => {
             if (!videoRef.current) return
@@ -28,6 +32,7 @@ const Main = () => {
         const handler = (e) => {
             if (monthRef.current && !monthRef.current.contains(e.target)) setMonthOpen(false)
             if (typeRef.current && !typeRef.current.contains(e.target)) setTypeOpen(false)
+            if (destinationRef.current && !destinationRef.current.contains(e.target)) setShowSuggestions(false)
         }
         document.addEventListener('mousedown', handler)
         return () => document.removeEventListener('mousedown', handler)
@@ -60,7 +65,7 @@ const Main = () => {
                     </div>
                     <div className="bg-white z-1000 rounded-2xl md:rounded-full mx-4 md:mx-0">
                         <div className="border-2 border-gray-100 flex flex-col md:flex-row items-stretch bg-white w-full max-w-[95vw] md:max-w-4xl rounded-2xl md:rounded-full">
-                            <div className="flex items-center gap-3 px-6 py-5 flex-1 border-b md:border-b-0 md:border-r border-gray-200">
+                            <div ref={destinationRef} className="relative flex items-center gap-3 px-6 py-5 flex-1 border-b md:border-b-0 md:border-r border-gray-200">
                                 <svg className="w-5 h-5 text-primary shrink-0" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
                                 </svg>
@@ -68,10 +73,24 @@ const Main = () => {
                                     id="destination-input"
                                     type="text"
                                     value={destination}
-                                    onChange={(e) => setDestination(e.target.value)}
-                                    placeholder="WHERE TO?"
+                                    onChange={(e) => { setDestination(e.target.value); setShowSuggestions(true); }}
+                                    onFocus={() => setShowSuggestions(true)}
+                                    placeholder="WHERE TO? (COUNTRY)"
                                     className="w-full bg-transparent outline-none text-xs font-bold tracking-widest text-gray-700 uppercase"
                                 />
+                                {showSuggestions && destination && countries.filter(c => c.name.toLowerCase().includes(destination.toLowerCase())).length > 0 && (
+                                    <div className="absolute top-full left-0 z-50 bg-white shadow-xl w-full md:w-56 border border-gray-100 mt-1 md:mt-0 rounded-b-xl overflow-hidden">
+                                        <div className="max-h-[200px] overflow-y-auto">
+                                            {countries.filter(c => c.name.toLowerCase().includes(destination.toLowerCase())).map((c) => (
+                                                <div key={c.id}
+                                                    onClick={() => { setDestination(c.name); setShowSuggestions(false); }}
+                                                    className="px-4 py-2 text-sm text-gray-500 hover:text-gray-800 hover:bg-gray-50 cursor-pointer transition-colors text-left uppercase font-bold tracking-widest">
+                                                    {c.name}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <div ref={monthRef} className="relative flex items-center gap-3 px-6 py-5 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-200 cursor-pointer select-none"
                                 onClick={() => { setMonthOpen(o => !o); setTypeOpen(false) }}>
@@ -130,6 +149,14 @@ const Main = () => {
                             </div>
                             <button
                                 id="find-now-btn"
+                                onClick={() => {
+                                    const match = countries.find(c => c.name.toLowerCase() === destination.toLowerCase())
+                                    if (match) {
+                                        navigate(`/destinations/${match.id}`)
+                                    } else {
+                                        navigate('/destinations')
+                                    }
+                                }}
                                 className="bg-primary hover:bg-[#222] transition-colors px-8 py-5 md:py-0 text-xs font-bold tracking-widest text-white uppercase cursor-pointer rounded-b-2xl md:rounded-none md:rounded-r-full">
                                 FIND NOW
                             </button>

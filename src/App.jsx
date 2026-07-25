@@ -9,6 +9,7 @@ import Tours from './pages/Tours'
 import TourDetails from './pages/TourDetails'
 import Blog from './pages/Blog'
 import BlogDetails from './pages/BlogDetails'
+import Booking from './pages/Booking'
 import { countries } from './data/destinations'
 const App = () => {
   const [showSticky, setShowSticky] = useState(false)
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/tours/:id" element={<TourDetails countries={countries} />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetails />} />
+        <Route path="/booking" element={<Booking countries={countries} />} />
       </Routes>
       <Footer />
     </div>

@@ -29,3 +29,24 @@ body {
 html, body {
   overscroll-behavior:none;
 }
+
+.input-style {
+  width: 100%;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  outline: none;
+  color: #1f2937;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: border-color 0.2s;
+  background: white;
+}
+
+.input-style:focus {
+  border-color: var(--color-primary);
+}
+
+.input-style::placeholder {
+  color: #d1d5db;
+}
