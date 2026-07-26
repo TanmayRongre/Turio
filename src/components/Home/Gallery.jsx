@@ -77,7 +77,7 @@ const Gallery = ({ countries = [] }) => {
           </p>
           <div className="w-10 h-1 bg-amber-400 rounded-full mx-auto mt-4" />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-4 h-[1100px] sm:h-[800px] md:h-[580px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-4 h-275 sm:h-200 md:h-145">
           {items.map((item) => (
             <div
               key={item.id}
@@ -93,7 +93,7 @@ const Gallery = ({ countries = [] }) => {
                 alt={item.name}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/80" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/80" />
               <div className="absolute bottom-5 left-5 text-white">
                 <span className="block font-cursive text-amber-400 text-lg italic mb-0.5">
                   {item.tag}

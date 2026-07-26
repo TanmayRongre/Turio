@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import TopBar from '../components/Home/TopBar'
 import Navbar from '../components/Home/Navbar'
 import { useLocation, useNavigate } from 'react-router-dom'
+import usePageTitle from '../hooks/usePageTitle'
 
 const travelTypes = ['Adventure', 'Cultural', 'Discovery', 'Historical', 'Relaxation', 'Wildlife']
 const groupSizes = ['Solo (1)', 'Couple (2)', 'Small Group (3–5)', 'Group (6–10)', 'Large Group (10+)']
@@ -18,27 +19,28 @@ const Booking = ({ countries = [] }) => {
 
   // Pre-fill from navigation state (passed from TourDetails)
   const prefill = location.state || {}
+  usePageTitle(prefill.tourName ? `Book: ${prefill.tourName}` : 'Book a Tour')
 
   const [step, setStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
 
   /* Step 1 */
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
+  const [firstName, setFirstName] = useState('John')
+  const [lastName, setLastName] = useState('Doe')
+  const [email, setEmail] = useState('john.doe@example.com')
+  const [phone, setPhone] = useState('+91 98765 43210')
 
   /* Step 2 */
-  const [destination, setDestination] = useState(prefill.destination || '')
+  const [destination, setDestination] = useState(prefill.destination || 'India')
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [travelMonth, setTravelMonth] = useState('')
+  const [travelMonth, setTravelMonth] = useState('October')
   const [monthOpen, setMonthOpen] = useState(false)
-  const [travelType, setTravelType] = useState(prefill.travelType || '')
+  const [travelType, setTravelType] = useState(prefill.travelType || 'Adventure')
   const [typeOpen, setTypeOpen] = useState(false)
-  const [groupSize, setGroupSize] = useState('')
+  const [groupSize, setGroupSize] = useState('Couple (2)')
   const [groupOpen, setGroupOpen] = useState(false)
-  const [budget, setBudget] = useState('')
-  const [notes, setNotes] = useState('')
+  const [budget, setBudget] = useState('150000')
+  const [notes, setNotes] = useState('Looking forward to this amazing trip!')
 
   const destRef = useRef(null)
   const monthRef = useRef(null)
@@ -83,13 +85,13 @@ const Booking = ({ countries = [] }) => {
             className="absolute left-0 w-full object-cover opacity-55"
             style={{ top: '-10vh', height: '120vh', willChange: 'transform' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/20 to-black/70 pointer-events-none" />
         </div>
 
         <div className="absolute inset-0 z-10 flex flex-col">
           <TopBar />
           <Navbar />
-          <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center mt-[-30px]">
+          <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center -mt-7.5">
             <span className="text-primary font-cursive text-2xl md:text-3xl drop-shadow-lg">
               Begin Your Adventure
             </span>
@@ -183,7 +185,7 @@ const Booking = ({ countries = [] }) => {
                     <MailIcon />
                     <input id="booking-email" type="email" value={email}
                       onChange={e => setEmail(e.target.value)} placeholder="your@email.com"
-                      className="input-style pl-10" />
+                      className="input-style !pl-10" />
                   </div>
                   <p className="text-xs text-gray-400 mt-1.5 pl-1">
                     ✉ Your booking updates &amp; itinerary form will arrive here
@@ -196,7 +198,7 @@ const Booking = ({ countries = [] }) => {
                     <PhoneIcon />
                     <input id="booking-phone" type="tel" value={phone}
                       onChange={e => setPhone(e.target.value)} placeholder="+91 98765 43210"
-                      className="input-style pl-10" />
+                      className="input-style !pl-10" />
                   </div>
                 </Field>
 
@@ -229,11 +231,11 @@ const Booking = ({ countries = [] }) => {
                       onChange={e => { setDestination(e.target.value); setShowSuggestions(true) }}
                       onFocus={() => setShowSuggestions(true)}
                       placeholder="Where do you want to go?"
-                      className="input-style pl-10" />
+                      className="input-style !pl-10" />
                     {showSuggestions && destination &&
                       countries.filter(c => c.name.toLowerCase().includes(destination.toLowerCase())).length > 0 && (
                         <div className="absolute top-full left-0 z-50 bg-white shadow-xl w-full border border-gray-100 mt-1 rounded-xl overflow-hidden">
-                          <div className="max-h-[180px] overflow-y-auto">
+                          <div className="max-h-45 overflow-y-auto">
                             {countries
                               .filter(c => c.name.toLowerCase().includes(destination.toLowerCase()))
                               .map(c => (
@@ -309,7 +311,7 @@ const Booking = ({ countries = [] }) => {
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">₹</span>
                       <input id="booking-budget" type="number" value={budget}
                         onChange={e => setBudget(e.target.value)} placeholder="e.g. 50000"
-                        className="input-style pl-8" />
+                        className="input-style !pl-8" />
                     </div>
                   </Field>
                 </div>
@@ -328,7 +330,7 @@ const Booking = ({ countries = [] }) => {
                     ← Back
                   </button>
                   <button id="booking-next-2" onClick={() => setStep(2)}
-                    className="flex-[2] py-4 bg-primary hover:bg-[#222] text-white font-bold tracking-[0.2em] uppercase rounded-full transition-colors shadow-lg shadow-primary/20 cursor-pointer">
+                    className="flex-2 py-4 bg-primary hover:bg-[#222] text-white font-bold tracking-[0.2em] uppercase rounded-full transition-colors shadow-lg shadow-primary/20 cursor-pointer">
                     Review →
                   </button>
                 </div>
@@ -404,7 +406,7 @@ const Booking = ({ countries = [] }) => {
                     ← Back
                   </button>
                   <button id="booking-submit" onClick={() => setSubmitted(true)}
-                    className="flex-[2] py-4 bg-primary hover:bg-[#222] text-white font-bold tracking-[0.2em] uppercase rounded-full transition-colors shadow-lg shadow-primary/20 cursor-pointer">
+                    className="flex-2 py-4 bg-primary hover:bg-[#222] text-white font-bold tracking-[0.2em] uppercase rounded-full transition-colors shadow-lg shadow-primary/20 cursor-pointer">
                     Confirm Booking ✓
                   </button>
                 </div>
@@ -518,7 +520,7 @@ const Dropdown = React.forwardRef(({ id, value, placeholder, open, onToggle, chi
     </svg>
     {open && (
       <div className="absolute top-full left-0 z-50 bg-white shadow-xl w-full border border-gray-100 mt-1 rounded-xl overflow-hidden">
-        <div className="max-h-[200px] overflow-y-auto">{children}</div>
+        <div className="max-h-50 overflow-y-auto">{children}</div>
       </div>
     )}
   </div>

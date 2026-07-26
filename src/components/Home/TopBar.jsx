@@ -6,10 +6,8 @@ const TopBar = () => {
         <span className="uppercase tracking-widest font-semibold">Follow Us:</span>
         <div className="tracking-wide">☎ 7887564XXX</div>
       </div>
-      <div className="flex gap-4">
-        <button className="uppercase tracking-widest font-semibold hover:text-primary transition-colors duration-200">
-          Login
-        </button>
+      <div className="flex items-center gap-3 text-gray-400">
+        <span className="tracking-wide">✉ info@turio.com</span>
       </div>
     </div>
   )

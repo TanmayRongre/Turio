@@ -4,9 +4,11 @@ import TopBar from '../components/Home/TopBar';
 import Navbar from '../components/Home/Navbar';
 import { Calendar } from 'lucide-react';
 import { blogs } from '../data/blogs';
+import usePageTitle from '../hooks/usePageTitle';
 
 const Blog = () => {
     const imageRef = useRef(null);
+    usePageTitle('Travel Blog');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -33,13 +35,13 @@ const Blog = () => {
                             willChange: 'transform',
                         }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/30 z-10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-black/30 z-10 pointer-events-none" />
                 </div>
                 
                 <div className="absolute inset-0 w-full h-full z-20 flex flex-col">
                     <TopBar />
                     <Navbar />
-                    <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center mt-[-40px]">
+                    <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center -mt-10">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-title tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                             Travel Blog
                         </h1>
@@ -51,7 +53,7 @@ const Blog = () => {
             </div>
 
             {/* Masonry Grid Section for Blogs */}
-            <div className="w-full px-4 md:px-10 lg:px-20 py-24 max-w-[1400px] mx-auto">
+            <div className="w-full px-4 md:px-10 lg:px-20 py-24 max-w-350 mx-auto">
                 <div className="columns-1 md:columns-2 lg:columns-3 gap-8">
                     {blogs.map((blog) => (
                     <Link to={`/blog/${blog.id}`} key={blog.id} className="block break-inside-avoid w-full mb-10 group cursor-pointer">

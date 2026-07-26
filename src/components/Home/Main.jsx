@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import TopBar from './TopBar'
 import Navbar from './Navbar'
 import heroVideo from '../../assets/hero-video.mp4'
+import usePageTitle from '../../hooks/usePageTitle'
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
@@ -10,6 +11,7 @@ const months = [
 const travelTypes = ['Adventure', 'Cultural', 'Discovery', 'Historical', 'Relaxation', 'Wildlife']
 const Main = ({ countries = [] }) => {
     const navigate = useNavigate()
+    usePageTitle('Home')
     const [destination, setDestination] = useState('')
     const [selectedMonth, setSelectedMonth] = useState(null)
     const [selectedType, setSelectedType] = useState(null)
@@ -80,7 +82,7 @@ const Main = ({ countries = [] }) => {
                                 />
                                 {showSuggestions && destination && countries.filter(c => c.name.toLowerCase().includes(destination.toLowerCase())).length > 0 && (
                                     <div className="absolute top-full left-0 z-50 bg-white shadow-xl w-full md:w-56 border border-gray-100 mt-1 md:mt-0 rounded-b-xl overflow-hidden">
-                                        <div className="max-h-[200px] overflow-y-auto">
+                                        <div className="max-h-50 overflow-y-auto">
                                             {countries.filter(c => c.name.toLowerCase().includes(destination.toLowerCase())).map((c) => (
                                                 <div key={c.id}
                                                     onClick={() => { setDestination(c.name); setShowSuggestions(false); }}
@@ -92,7 +94,7 @@ const Main = ({ countries = [] }) => {
                                     </div>
                                 )}
                             </div>
-                            <div ref={monthRef} className="relative flex items-center gap-3 px-6 py-5 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-200 cursor-pointer select-none"
+                            <div ref={monthRef} className="relative flex items-center gap-3 px-6 py-5 min-w-45 border-b md:border-b-0 md:border-r border-gray-200 cursor-pointer select-none"
                                 onClick={() => { setMonthOpen(o => !o); setTypeOpen(false) }}>
                                 <svg className="w-5 h-5 text-primary shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -109,7 +111,7 @@ const Main = ({ countries = [] }) => {
                                 {monthOpen && (
                                     <div className="absolute top-full left-0 z-50 bg-white shadow-xl w-56 border border-gray-100">
                                         <div className="px-4 py-2 text-sm font-semibold text-gray-800 border-b border-gray-100">When?</div>
-                                        <div className="max-h-[200px] overflow-y-auto">
+                                        <div className="max-h-50 overflow-y-auto">
                                             {months.map((m) => (
                                                 <div key={m}
                                                     onClick={(e) => { e.stopPropagation(); setSelectedMonth(m); setMonthOpen(false) }}
@@ -121,7 +123,7 @@ const Main = ({ countries = [] }) => {
                                     </div>
                                 )}
                             </div>
-                            <div ref={typeRef} className="relative flex items-center gap-3 px-6 py-5 min-w-[200px] border-b md:border-b-0 md:border-r border-gray-200 cursor-pointer select-none"
+                            <div ref={typeRef} className="relative flex items-center gap-3 px-6 py-5 min-w-50 border-b md:border-b-0 md:border-r border-gray-200 cursor-pointer select-none"
                                 onClick={() => { setTypeOpen(o => !o); setMonthOpen(false) }}>
                                 <svg className="w-5 h-5 text-primary shrink-0" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M5 3h14l-3 5 3 5H5V3zm0 13v5H3V3h2v13z" />
@@ -135,7 +137,7 @@ const Main = ({ countries = [] }) => {
                                 {typeOpen && (
                                     <div className="absolute top-full left-0 z-50 bg-white shadow-xl w-56 border border-gray-100">
                                         <div className="px-4 py-2 text-sm font-semibold text-gray-800 border-b border-gray-100">Travel Type</div>
-                                        <div className="max-h-[200px] overflow-y-auto">
+                                        <div className="max-h-50 overflow-y-auto">
                                             {travelTypes.map((t) => (
                                                 <div key={t}
                                                     onClick={(e) => { e.stopPropagation(); setSelectedType(t); setTypeOpen(false) }}
@@ -153,6 +155,8 @@ const Main = ({ countries = [] }) => {
                                     const match = countries.find(c => c.name.toLowerCase() === destination.toLowerCase())
                                     if (match) {
                                         navigate(`/destinations/${match.id}`)
+                                    } else if (destination.trim()) {
+                                        navigate(`/destinations?q=${encodeURIComponent(destination.trim())}`)
                                     } else {
                                         navigate('/destinations')
                                     }

@@ -40,7 +40,10 @@ html, body {
   width: 100%;
   border: 2px solid #e5e7eb;
   border-radius: 0.75rem;
-  padding: 0.875rem 1rem;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   outline: none;
   color: #1f2937;
   font-size: 0.875rem;
@@ -54,5 +57,5 @@ html, body {
 }
 
 .input-style::placeholder {
-  color: #d1d5db;
+  color: #9ca3af;
 }

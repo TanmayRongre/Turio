@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import TopBar from '../components/Home/TopBar';
 import Navbar from '../components/Home/Navbar';
+import usePageTitle from '../hooks/usePageTitle';
 
 const TourDetails = ({ countries }) => {
     const { id } = useParams();
@@ -10,6 +11,7 @@ const TourDetails = ({ countries }) => {
     
     // Find the tour across all countries
     const tour = countries?.flatMap(c => c.tours).find(t => t?.id === parseInt(id));
+    usePageTitle(tour ? `${tour.name} — Tour` : 'Tour Details');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -49,13 +51,13 @@ const TourDetails = ({ countries }) => {
                             willChange: 'transform',
                         }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60 z-10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/20 to-black/60 z-10 pointer-events-none" />
                 </div>
                 
                 <div className="absolute inset-0 w-full h-full z-20 flex flex-col">
                     <TopBar />
                     <Navbar />
-                    <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center mt-[-40px]">
+                    <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center -mt-10">
                         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white font-title tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                             {tour.name}
                         </h1>
@@ -64,7 +66,7 @@ const TourDetails = ({ countries }) => {
             </div>
 
             {/* Main Content Area */}
-            <div className="w-full px-6 md:px-12 lg:px-20 py-16 max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-12">
+            <div className="w-full px-6 md:px-12 lg:px-20 py-16 max-w-350 mx-auto flex flex-col lg:flex-row gap-12">
                 
                 {/* Left Side: Details & Itinerary */}
                 <div className="w-full lg:w-2/3 flex flex-col gap-10">
@@ -113,7 +115,7 @@ const TourDetails = ({ countries }) => {
                     {/* Roadmap / Itinerary */}
                     <div className="flex flex-col gap-6 mt-4">
                         <h3 className="font-title text-3xl font-bold text-gray-900">Itinerary</h3>
-                        <div className="flex flex-col gap-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
+                        <div className="flex flex-col gap-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-linear-to-b before:from-transparent before:via-gray-200 before:to-transparent">
                             {tour.roadmap?.map((item, index) => (
                                 <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                                     {/* Timeline dot */}

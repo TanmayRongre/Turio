@@ -4,7 +4,7 @@ const InfoCard = ({ country }) => {
     const navigate = useNavigate()
     return (
         <div
-            className="group relative w-[85vw] md:w-[calc((100%-48px)/3)] h-[450px] rounded-3xl overflow-hidden shadow-lg shrink-0 cursor-pointer snap-start"
+            className="group relative w-[85vw] md:w-[calc((100%-48px)/3)] h-112.5 rounded-3xl overflow-hidden shadow-lg shrink-0 cursor-pointer snap-start"
             onClick={() => navigate(`/destinations/${country.id}`)}
         >
             <img

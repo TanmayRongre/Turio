@@ -53,7 +53,7 @@ const Footer = () => {
             <h1 className="text-5xl font-cursive">Turio</h1>
           </div>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam urna lacus porta, augue eget sagittis.
+            Turio crafts unforgettable travel experiences — from Himalayan treks to Aegean sunsets. Your perfect journey starts here.
           </p>
           <ul className="flex flex-col gap-3 text-sm text-gray-400">
             <li className="flex items-center gap-3">

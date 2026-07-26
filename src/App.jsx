@@ -12,6 +12,7 @@ import BlogDetails from './pages/BlogDetails'
 import Booking from './pages/Booking'
 import { countries } from './data/destinations'
 import CustomCursor from './components/CustomCursor'
+import NotFound from './pages/NotFound'
 const App = () => {
   const [showSticky, setShowSticky] = useState(false)
   useEffect(() => {
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetails />} />
         <Route path="/booking" element={<Booking countries={countries} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

@@ -2,12 +2,14 @@ import React, { useRef, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import TopBar from '../components/Home/TopBar';
 import Navbar from '../components/Home/Navbar';
+import usePageTitle from '../hooks/usePageTitle';
 
 const DestinationDetail = ({ countries }) => {
     const { id } = useParams();
     const imageRef = useRef(null);
     
     const country = countries?.find(c => c.id === parseInt(id));
+    usePageTitle(country ? `${country.name} — Destination` : 'Destination');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -47,13 +49,13 @@ const DestinationDetail = ({ countries }) => {
                             willChange: 'transform',
                         }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60 z-10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/20 to-black/60 z-10 pointer-events-none" />
                 </div>
                 
                 <div className="absolute inset-0 w-full h-full z-20 flex flex-col">
                     <TopBar />
                     <Navbar />
-                    <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center mt-[-40px]">
+                    <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center -mt-10">
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white font-title tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                             {country.name}
                         </h1>
@@ -65,7 +67,7 @@ const DestinationDetail = ({ countries }) => {
             </div>
 
             {/* Main Content Area */}
-            <div className="w-full px-6 md:px-12 lg:px-20 py-16 max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-12">
+            <div className="w-full px-6 md:px-12 lg:px-20 py-16 max-w-350 mx-auto flex flex-col lg:flex-row gap-12">
                 
                 {/* Left Side: Description and Photos */}
                 <div className="w-full lg:w-2/3 flex flex-col gap-8">

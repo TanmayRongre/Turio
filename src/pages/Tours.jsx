@@ -2,9 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TopBar from '../components/Home/TopBar';
 import Navbar from '../components/Home/Navbar';
+import usePageTitle from '../hooks/usePageTitle';
 
 const Tours = ({ countries }) => {
     const imageRef = useRef(null);
+    usePageTitle('Our Tours');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -31,13 +33,13 @@ const Tours = ({ countries }) => {
                             willChange: 'transform',
                         }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/30 z-10 pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-black/30 z-10 pointer-events-none" />
                 </div>
-                
+
                 <div className="absolute inset-0 w-full h-full z-20 flex flex-col">
                     <TopBar />
                     <Navbar />
-                    <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center mt-[-40px]">
+                    <div className="flex flex-col justify-center items-center w-full h-full gap-4 px-4 text-center -mt-10">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-title tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                             Our Tours
                         </h1>
@@ -49,17 +51,17 @@ const Tours = ({ countries }) => {
             </div>
 
             {/* Tours by Country */}
-            <div className="w-full px-4 md:px-10 lg:px-20 py-16 max-w-[1400px] mx-auto space-y-20">
+            <div className="w-full px-4 md:px-10 lg:px-20 py-16 max-w-350 mx-auto space-y-20">
                 {countries && countries.map((country) => (
                     <div key={country.id} className="flex flex-col w-full">
                         
                         {/* Section Header */}
                         <div className="flex items-center justify-center w-full mb-10">
-                            <div className="h-[2px] bg-gray-300 flex-grow rounded-full max-w-[300px]"></div>
+                            <div className="h-0.5 bg-gray-300 grow rounded-full max-w-75"></div>
                             <h2 className="mx-6 text-3xl md:text-4xl font-title font-bold text-gray-800 tracking-wider">
                                 {country.name}
                             </h2>
-                            <div className="h-[2px] bg-gray-300 flex-grow rounded-full max-w-[300px]"></div>
+                            <div className="h-0.5 bg-gray-300 grow rounded-full max-w-75"></div>
                         </div>
 
                         {/* Tours Grid */}
@@ -76,12 +78,12 @@ const Tours = ({ countries }) => {
                                         <div className="absolute top-4 right-4 bg-[#FFCC05] text-gray-900 font-bold px-3 py-1 rounded-full text-sm shadow-md z-10">
                                             {tour.duration}
                                         </div>
-                                        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+                                        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-linear-to-t from-black/80 to-transparent pointer-events-none"></div>
                                         <div className="absolute bottom-4 left-4 text-white z-10">
                                             <p className="text-xl font-bold font-title tracking-wide">{tour.price}</p>
                                         </div>
                                     </div>
-                                    <div className="p-6 flex flex-col flex-grow">
+                                    <div className="p-6 flex flex-col grow">
                                         <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-[#FFCC05] transition-colors duration-300">
                                             {tour.name}
                                         </h3>
